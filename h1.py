@@ -90,11 +90,13 @@ def get_scope(handles, eligible_only=False):
                     continue
             if edge['node']['asset_type'] not in ['URL']:
                 continue
-            url = edge['node']['asset_identifier']
-            if 'http' in url:
-                url = url.split('://')[1]
-            url = url.split('/')[0]
-            urls.append(url)
+            url_ = edge['node']['asset_identifier']
+            for u in url_.split(','):
+                url = u
+                if 'http' in url:
+                    url = url.split('://')[1]
+                url = url.split('/')[0]
+                urls.append(url)
         print(f'{len(urls)} urls')
     return urls
 
